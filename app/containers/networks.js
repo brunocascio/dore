@@ -1,11 +1,11 @@
 // @flow
 import { connect } from 'react-redux';
-import Graph from '../../components/Graph';
-import { getNetworks } from '../../actions/network';
+import Networks from '../components/networks';
+import { getNetworks } from '../actions/networks';
 
 function mapStateToProps(state) {
   return {
-    networks: state.network.networks
+    ...state.networks
   };
 }
 
@@ -18,4 +18,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Graph);
+)(Networks);

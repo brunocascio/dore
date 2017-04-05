@@ -1,16 +1,15 @@
 // @flow
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
-import App from './containers/App';
-import HomePage from './containers/HomePage';
-import CounterPage from './containers/CounterPage';
-import GraphPage from './containers/Graph';
+import App from './containers/app';
+import Networks from './containers/networks';
+import Network from './containers/network';
 
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={GraphPage} />
-    <Route path="/counter" component={CounterPage} />
-    <Route path="/graph" component={GraphPage} />
+    <IndexRoute component={Networks} />
+    <Route path="/networks" component={Networks} />
+    <Route path="/network/:network" component={Network} />
   </Route>
 );

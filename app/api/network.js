@@ -2,11 +2,7 @@ import docker from '../utils/docker';
 
 function getDefaultArgs() {
   return {
-    filters: {
-      type: {
-        custom: true
-      }
-    }
+    all: true
   };
 }
 
@@ -18,11 +14,12 @@ function mergeArgs(opts: Object = {}) {
 export default {
 
   /**
-   * getNetworks - retrieves user's created networks
+   * getContainers - retrieves user's created containers
    *
-   * @return {Promise}     Array of networks
+   * @return {Promise}     Array of containers
    */
-  getNetworks(opts: Object = {}, cb: Function) {
-    docker.listNetworks(mergeArgs(opts), cb);
+  getContainers(opts: Object = {}, cb: Function) {
+    const net = docker.getNetwork(opts.filters.network)
+    net.inspect(cb);
   }
 };

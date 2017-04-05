@@ -4,10 +4,14 @@ import network from '../api/network';
 export const RECEIVE_LIST = 'NETWORK/RECEIVE_LIST';
 export const ERROR = 'NETWORK/ERROR';
 
-function receive(networks) {
+function receive(containers) {
+  const ids = Object.keys(containers);
+  const cs = ids.map((Id) => {
+    return {...containers[Id], Id}
+  });
   return {
     type: RECEIVE_LIST,
-    networks
+    containers: cs
   };
 }
 
@@ -18,13 +22,20 @@ function error(err) {
   };
 }
 
-export function getNetworks(opts: Object = {}) {
+export const onLoad = (network) => {
+  return (dispatch) => {
+    const filters = { network: [network] }
+    dispatch(getContainers({filters,}))
+  }
+}
+
+export const getContainers = (opts: Object = {}) => {
   return (dispatch: Function) => {
-    network.getNetworks(opts, (err, data) => {
+    network.getContainers(opts, (err, data) => {
       if (err) {
         dispatch(error(err));
       } else {
-        dispatch(receive(data));
+        dispatch(receive(data.Containers));
       }
     });
   };

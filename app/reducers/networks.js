@@ -1,8 +1,8 @@
 // @flow
-import { RECEIVE_LIST, ERROR } from '../actions/network';
+import { RECEIVE_LIST, ERROR } from '../actions/networks';
 
 const initial = {
-  containers: [],
+  networks: [],
   error: false
 };
 
@@ -12,11 +12,11 @@ export default (state: Object = initial, action: Object) => {
 
     case RECEIVE_LIST:
       return Object.assign({}, state, {
-        containers: action.containers
+        networks: action.networks
       });
 
     case ERROR:
-      return Object.assign({}, initial, {
+      return Object.assign({}, state, {
         error: action.error
       });
 
